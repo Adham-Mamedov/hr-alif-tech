@@ -1,5 +1,6 @@
 <template>
   <div class="home">
+    <h1>Dashboard Page</h1>
 
   </div>
 </template>

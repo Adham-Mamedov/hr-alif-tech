@@ -1,5 +1,5 @@
 <template>
-  <table class="table table-striped mb-0">
+  <table class="table table-striped mb-0 border-bottom">
     <caption>List of employees</caption>
     <thead>
     <tr>
@@ -12,7 +12,7 @@
     </tr>
     </thead>
     <tbody v-if="displayedEmployees && displayedEmployees.length !== 0">
-    <tr v-for="(employee, idx) in displayedEmployees">
+    <tr v-for="(employee, idx) in displayedEmployees" :key="employee.id">
       <th scope="row">{{ idx + 1 }}</th>
       <td>
         <router-link :to="`/employee/${employee.id}`">{{ employee.name}}</router-link>

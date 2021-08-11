@@ -40,17 +40,8 @@ export default {
   },
   computed: {
     employee() {
-      return {
-        id: 1234,
-        name: 'John Stone',
-        DoB: '1991-08-05',
-        gender: 'male',
-        department: 'IT',
-        position: 'Head of department',
-        startDate: new Date().toDateString()
-      }
       const id = this.$route.params.id
-      return this.$store.getters.employees.find(el => el.id === this.$route.params.id)
+      return this.$store.getters.employeeById(id)
     },
     age() {
       return new Date().getFullYear() - new Date(this.employee.DoB).getFullYear()

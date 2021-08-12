@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "serve": "concurrently \"vue-cli-service serve\" \"json-server --watch ./data/employees.json --port 5000\"",
-    "build": "vue-cli-service build json-server --watch ./data/employees.json"
+    "build": "concurrently \"vue-cli-service build\" \"json-server --watch ./data/employees.json --port 5000\""
   },
   "dependencies": {
     "axios": "^0.21.1",
@@ -17,7 +17,6 @@
     "json-server": "^0.16.3",
     "popper.js": "^1.16.1",
     "vue": "^3.0.0",
-    "vue-chartjs": "^3.5.1",
     "vue-router": "^4.0.0-0",
     "vuex": "^4.0.0-0"
   },

@@ -1,4 +1,5 @@
 import axios from 'axios';
+import getAge from '../../utils/ageCalculator';
 
 const url = 'http://localhost:5000/employees'
 
@@ -59,6 +60,23 @@ export default {
   },
   getters: {
     employees: s => s.employees,
-    employeeById: s => id => s.employees.find(el => el.id === +id) // remove + when ids will be a type of string
+    employeeById: s => id => s.employees.find(el => el.id === +id), // remove + when ids will be a type of string
+    statistics: s => ({
+      totalNumberOfEmployees: s.employees.length,
+      numberOfMales: s.employees.filter(el => el.gender === 'male').length,
+      numberOfFemales: s.employees.filter(el => el.gender === 'female').length,
+      averageAge: (s.employees.reduce((acc, cur) => acc + getAge(cur.DoB), 0) / (s.employees.length || 1)).toFixed(1)
+    }),
+    employeesByDepartments: (s, getters) => {
+      const result = {}
+      getters.employees.forEach(el => {
+        if (result[el.department]) {
+          result[el.department]++
+        } else {
+          result[el.department] = 1
+        }
+      })
+      return result
+    }
   }
 }

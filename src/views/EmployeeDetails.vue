@@ -1,6 +1,6 @@
 <template>
   <h1 class="card-title py-2">Employee details</h1>
-  <div class="card mb-3">
+  <div class="card mb-3" v-if="employee">
     <div class="row no-gutters">
       <div class="col-md-4">
         <img class="img-fluid" src="https://le-cdn.website-editor.net/4d1bfad533d546148a7d7e044841c0dc/dms3rep/multi/opt/%23Alain+Connu-1920w.jpg" alt="profile photo">
@@ -20,7 +20,7 @@
       </div>
     </div>
   </div>
-
+  <p class="display-4 text-danger" v-else>No employee with this id!</p>
 
   <Modal v-if="modal" title="Update Employee" @close="modal = false">
     <EmployeeForm action-text="Update" :employee="employee" submitType="update" @close="modal = false"/>

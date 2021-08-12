@@ -32,7 +32,7 @@
     </tbody>
   </table>
 
-  <Pagination :current-page="currentPage" :page-number="pageNumber"/>
+  <Pagination v-if="displayedEmployees && displayedEmployees.length !== 0" :current-page="currentPage" :page-number="pageNumber"/>
 </template>
 
 <script>
@@ -50,8 +50,9 @@ export default {
     }
   },
   methods: {
-    removeEmployee(id) {
-
+    async removeEmployee(id) {
+      await this.$store.dispatch('removeEmployee', id)
+      this.$forceUpdate()
     },
     sortBy(type) {
       if(this.sortedBy === type) {
@@ -72,6 +73,11 @@ export default {
     },
     pageNumber() {
       return Math.ceil(this.employees.length / 10)
+    }
+  },
+  watch: {
+    employees(val) {
+      this.employeeList = val
     }
   }
 }

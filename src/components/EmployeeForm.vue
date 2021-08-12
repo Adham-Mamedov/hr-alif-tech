@@ -1,6 +1,6 @@
 <template>
   <form class="needs-validation" ref="form" novalidate
-        @submit.prevent="submitType === 'create' ? createEmployee: updateEmployee">
+        @submit.prevent="submitFunctions[submitType]($event)">
     <div class=" mb-3">
       <label for="fullName">Full name</label>
       <input type="text" class="form-control" id="fullName" v-model="name" required>
@@ -89,6 +89,12 @@ export default {
   computed: {
     isDoBValid() {
       return new Date(this.DoB).getTime() < new Date().getTime()
+    },
+    submitFunctions() {
+      return {
+        create: (e) => this.createEmployee(e),
+        update: (e) => this.updateEmployee(e),
+      }
     }
   },
   methods: {
@@ -102,7 +108,7 @@ export default {
     createEmployee(e) {
       if (!this.isFormValid(e.target)) return;
       const formData = this.getFormData()
-      console.log(formData)
+      this.$store.dispatch('addEmployee', formData)
 
       this.clearFields()
       this.$emit('close')
@@ -111,7 +117,9 @@ export default {
     updateEmployee(e) {
       if (!this.isFormValid(e.target)) return;
       const formData = this.getFormData()
-      console.log(formData)
+      formData.id = +this.$route.params.id
+      formData.startDate = this.employee.startDate // this one is not necessary if working with json server
+      this.$store.dispatch('updateEmployee', formData)
 
       this.clearFields()
       this.$emit('close')

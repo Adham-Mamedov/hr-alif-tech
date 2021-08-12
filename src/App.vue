@@ -9,7 +9,10 @@
 <script>
 import MainLayout from '@/layouts/MainLayout';
 export default {
-  components: {MainLayout}
+  components: {MainLayout},
+  async mounted() {
+    this.$store.dispatch('loadEmployees')
+  }
 }
 </script>
 

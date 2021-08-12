@@ -1,3 +1,22 @@
 {
-  "employees": []
+  "employees": [
+    {
+      "name": "Adham",
+      "department": "IT",
+      "position": "Front-",
+      "DoB": "1999-11-11",
+      "gender": "male",
+      "startDate": "Thu Aug 12 2021",
+      "id": 1
+    },
+    {
+      "name": "John Smith",
+      "department": "Marketing",
+      "position": "Head",
+      "DoB": "1999-11-11",
+      "gender": "male",
+      "startDate": "Thu Aug 12 2021",
+      "id": 2
+    }
+  ]
 }

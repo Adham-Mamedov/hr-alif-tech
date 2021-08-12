@@ -11,7 +11,7 @@ import MainLayout from '@/layouts/MainLayout';
 export default {
   components: {MainLayout},
   async mounted() {
-    this.$store.dispatch('loadEmployees')
+    await this.$store.dispatch('loadEmployees')
   }
 }
 </script>

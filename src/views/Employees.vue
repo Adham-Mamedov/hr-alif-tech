@@ -1,6 +1,7 @@
 <template>
   <h1 class="card-title py-2">Our Employees</h1>
-  <EmployeeList :employees="employees"/>
+  <Loader v-if="loading"/>
+  <EmployeeList v-else :employees="employees"/>
 
   <button @click="modal = true" type="button" class="btn btn-primary mt-3" data-toggle="modal" data-target="#staticBackdrop">
     Add employee
@@ -15,17 +16,23 @@ import Modal from '@/components/Modal';
 import EmployeeList from '@/components/EmployeeList';
 import EmployeeDetails from '@/views/EmployeeDetails';
 import EmployeeForm from '@/components/EmployeeForm';
-import {mapGetters} from 'vuex'
+import Loader from '@/components/Loader';
 export default {
   name: "Employees",
-  components: {EmployeeForm, EmployeeDetails, EmployeeList, Modal},
+  components: {Loader, EmployeeForm, EmployeeDetails, EmployeeList, Modal},
   data() {
     return {
       modal: false,
+      loading: false,
     }
   },
   computed: {
-    ...mapGetters(['employees'])
+    employees() {
+      this.loading = true
+      const data = this.$store.getters.employees
+      this.loading = false
+      return data
+    }
   }
 }
 </script>
